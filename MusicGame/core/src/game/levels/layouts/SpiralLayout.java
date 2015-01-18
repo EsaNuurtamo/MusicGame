@@ -27,22 +27,21 @@ public class SpiralLayout {
 		numBoxes=colors.length;
 		float y=0;
 		for(Color c:colors){
-			areas.add(new ColorBar(state, c, new Vector2(0,y), MyConst.APP_HEIGHT/numBoxes));
-			y+=MyConst.APP_HEIGHT/numBoxes;
+			
 		}
 	}
 	
-	public void setBoxes(List<ColorBar> boxes) {
+	public void setBoxes(List<ColorArea> boxes) {
 		this.areas = boxes;
 	}
 	
 	public void draw(ShapeRenderer renderer){
-		for(ColorBar b:areas){
+		for(ColorArea b:areas){
 			b.draw(renderer);
 		}
 	}
 	
-	public List<ColorBar> getBoxes() {
+	public List<ColorArea> getAreas() {
 		return areas;
 	}
 }
