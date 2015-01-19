@@ -35,13 +35,13 @@ public class MenuScreen implements Screen {
 	private SpriteBatch batch;
     private Table table;
 	private Game game;
-        private TextField save;
-        private MenuNode menu;
+    private TextField save;
+    private MenuNode menu;
         
 	
-        public MenuScreen(Game g){
-            this.game=g;
-            skin=MyConst.skin;
+    public MenuScreen(Game g){
+        this.game=g;
+        skin=MyConst.skin;
 	}
 
 	
@@ -83,7 +83,10 @@ public class MenuScreen implements Screen {
             stage = new Stage(new FitViewport(MyConst.APP_WIDTH, MyConst.APP_HEIGHT));
             
             menu=
-            new MenuNode("MusicGame",new MenuNode("New Game", new MenuNode("Color Bars"),
+            new MenuNode("MusicGame",new MenuNode("New Game", new MenuNode("Color Bars", new MenuNode("Easy"),
+            		                                                                     new MenuNode("Medium"),
+            		                                                                     new MenuNode("Hard")),
+            													
             												  new MenuNode("Flying Boxes"),
             												  new MenuNode("Spiral level"),
             												  new MenuNode("Main Menu")),
@@ -170,8 +173,19 @@ public class MenuScreen implements Screen {
                     	
                         Gdx.app.exit();
                         
-                    }else if(s.equals("Color Bars")){
-                    	play.setLevel(new ColorBarsLvl(play));
+                    }else if(menu.getName().equals("Color Bars")){
+                    	
+                    	int d=0;
+                    	if(s.equals("Easy")){
+                    		
+                    		d=0;
+                    	}else if(s.equals("Medium")){
+                    		
+                    		d=1;
+                    	}else{
+                    		d=2;
+                    	}
+                    	play.setLevel(new ColorBarsLvl(play, d));
                     	game.setScreen(play);
                         dispose();
                     }else if(s.equals("Flying Boxes")){

@@ -17,7 +17,7 @@ public class FlyingBoxesLvl extends AbstractLevel{
 	int[] lista;
 	Ball ball;
 	public FlyingBoxesLvl(PlayScreen state) {
-		super(state);
+		super(state, 0);
 		name="FlyingBoxes";
 		
 		

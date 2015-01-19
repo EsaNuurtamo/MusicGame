@@ -38,9 +38,10 @@ public abstract class AbstractLevel {
 	protected boolean changing;
 	protected int numSpawned;
 	protected String name;
-	
-	public AbstractLevel(PlayScreen state) {
+	protected int difficulty=0;
+	public AbstractLevel(PlayScreen state, int difficulty) {
 		this.state=state;
+		this.difficulty=difficulty;
 		init();
 	}
 	public void initColors(Color... colors){
@@ -50,6 +51,7 @@ public abstract class AbstractLevel {
 	}
 	
 	public void init(){
+		
 		this.objects=new ArrayList<AbstractObject>();
 		this.objectColors=new ArrayList<Color>();
 		lvlTime=0;

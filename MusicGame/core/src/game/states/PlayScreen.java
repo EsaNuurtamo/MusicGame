@@ -45,7 +45,7 @@ public class PlayScreen implements Screen{
      
     public PlayScreen(Game g) {
         this.game=g;  
-        this.level=new ColorBarsLvl(this);
+        this.level=new ColorBarsLvl(this, 0);
     }
     
     @Override
@@ -88,7 +88,7 @@ public class PlayScreen implements Screen{
         if(level.isGameOver()){
         	batch.begin();
 	        	font.draw(batch, "GameOver!", MyConst.APP_WIDTH/4, MyConst.APP_HEIGHT/2+100);
-	        	font.draw(batch, "Your Score: "+level.getLvlTime(), MyConst.APP_WIDTH/6, MyConst.APP_HEIGHT/2+30);
+	        	font.draw(batch, "Your Score: "+level.getScore(), MyConst.APP_WIDTH/6, MyConst.APP_HEIGHT/2+30);
         	batch.end();
         	
         	Timer.schedule(new Task(){

@@ -32,6 +32,7 @@ public class Ball extends AbstractObject{
     	renderer.setColor(Color.BLACK);
 		renderer.circle(circle.x, circle.y, circle.radius);
     	renderer.setColor(color);
+    	//renderer.cone(circle.x, circle.y, 0, 10, 10);
 		renderer.circle(circle.x, circle.y, circle.radius-10);
     }
 	

@@ -18,8 +18,11 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class ColorBarsLvl extends AbstractLevel{
 	int[] bombTimes;
-	public ColorBarsLvl(PlayScreen state) {
-		super(state);
+	
+	public ColorBarsLvl(PlayScreen state, int difficulty) {
+		
+		super(state, difficulty);
+		
 		name="ColorBars";
 		
 	}
@@ -36,7 +39,15 @@ public class ColorBarsLvl extends AbstractLevel{
 		super.init();
 		this.layout=new BarLayout(state);
 		initBombTimes();
-		initColors(Color.RED, Color.ORANGE, Color.OLIVE, Color.CYAN);
+		System.out.println(difficulty);
+		if(difficulty==0){
+			initColors(new Color(0.5f,0,0,1f), new Color(1f, 0,0,1f));
+		}else if(difficulty==1){
+			initColors(Color.RED, Color.ORANGE, Color.OLIVE);
+		}else{
+			initColors(Color.RED, Color.ORANGE, Color.OLIVE, Color.CYAN);
+		}
+		
 		
 	}
 
@@ -97,15 +108,15 @@ public class ColorBarsLvl extends AbstractLevel{
 			Vector2 position;
 			Vector2 direction;
 			float radius=obj.getRadius();
-			if(0.5f>Math.random()){
-	    		position=new Vector2(radius+(float)Math.random()*(MyConst.APP_WIDTH-2*obj.getRadius()), -2*radius);
-	    		direction=new Vector2(0f,50f);
+			//if(0.5f>Math.random()){
+	    		//position=new Vector2(radius+(float)Math.random()*(MyConst.APP_WIDTH-2*obj.getRadius()), -2*radius);
+	    		//direction=new Vector2(0f,50f);
 	    		
-	    	}else{
+	    	//}else{
 	    		position=new Vector2(obj.getRadius()+(float)Math.random()*(MyConst.APP_WIDTH-2*radius), MyConst.APP_HEIGHT+2*radius);
 	    		direction=new Vector2(0f,-50f);
 	    		
-	    	}
+	    	//}
 			obj.setPosition(position);
 			obj.setDirection(direction);
 			objects.add(obj);

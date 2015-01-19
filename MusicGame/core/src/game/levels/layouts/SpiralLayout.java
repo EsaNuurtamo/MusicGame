@@ -13,25 +13,23 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public class SpiralLayout {
-	private int numBoxes=0;
+	private int numAreas=0;
 	private PlayScreen state;
 	private List<ColorArea> areas;
 	
 	public SpiralLayout(PlayScreen state) {
 		areas=new ArrayList<ColorArea>();
 		this.state=state;
-		createLayout(Color.CYAN,Color.GREEN,Color.MAGENTA);
+		createLayout(Color.CYAN,Color.GREEN,Color.MAGENTA, Color.MAGENTA);
 	}
 	
 	public void createLayout(Color... colors){
-		numBoxes=colors.length;
+		numAreas=colors.length;
 		float y=0;
-		for(Color c:colors){
-			
-		}
+		
 	}
 	
-	public void setBoxes(List<ColorArea> boxes) {
+	public void setAreas(List<ColorArea> boxes) {
 		this.areas = boxes;
 	}
 	

@@ -9,9 +9,10 @@ import com.badlogic.gdx.math.Vector2;
 
 public class ColorArea extends AbstractObject{
 	Polygon area;
-	public ColorArea(PlayScreen state, Vector2 position) {
+	public ColorArea(PlayScreen state, Vector2 position, Vector2[] vertices) {
 		super(state, position);
 		area=new Polygon();
+		float[] vert=new float[vertices.length*2];
 	}
 
 	@Override

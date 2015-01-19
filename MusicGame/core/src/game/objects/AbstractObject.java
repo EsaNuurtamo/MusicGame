@@ -19,7 +19,6 @@ import com.badlogic.gdx.physics.box2d.Shape;
  */
 public abstract class AbstractObject{
 	protected PlayScreen state;
-	
 	protected Vector2 position;
 	protected Vector2 direction;
 	protected Vector2 velocity;

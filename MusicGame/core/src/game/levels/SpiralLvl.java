@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 public class SpiralLvl extends AbstractLevel{
 
 	public SpiralLvl(PlayScreen state) {
-		super(state);
+		super(state,0);
 		name="Spiral";
 	}
 	
