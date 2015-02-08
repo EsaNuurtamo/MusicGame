@@ -1,14 +1,16 @@
 package game.states;
 
 
+import game.Content;
 import game.MyConst;
 import game.input.TouchControls;
-import game.levels.ColorBarsLvl;
 import game.levels.AbstractLevel;
+import game.levels.ColorBarsLvl;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -38,6 +40,7 @@ public class PlayScreen implements Screen{
 	private TouchControls touches;
     private OrthographicCamera camera;
     private Viewport viewport;
+    
     //Gamehandler
     private Game game;
     private AbstractLevel level;
@@ -45,6 +48,7 @@ public class PlayScreen implements Screen{
      
     public PlayScreen(Game g) {
         this.game=g;  
+        Content.loadMusic("sound/Theme.ogg", "Theme");
         this.level=new ColorBarsLvl(this, 0);
     }
     
@@ -70,12 +74,19 @@ public class PlayScreen implements Screen{
         //inputMultiplexer.addProcessor();
         Gdx.input.setInputProcessor(new GestureDetector(touches));
         
+        
+        
+        
     }
     
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
+        if(level.isSlowed()){
+        	delta*=0.4f;
+        }
         
         if(exiting){
         	ScoreScreen s=new ScoreScreen(game, level);

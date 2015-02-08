@@ -1,23 +1,21 @@
 package game.levels;
 
-import game.MyConst;
 import game.input.Mouse;
 import game.levels.layouts.BarLayout;
-import game.objects.Ball;
-import game.objects.Bomb;
-import game.objects.ColorBar;
 import game.objects.AbstractObject;
+import game.objects.ColorBar;
 import game.states.PlayScreen;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.utils.viewport.Viewport;
 /**
  * Has all the basic principles of any level. It handles the effect of touches and it updates the logic of the objects.
@@ -39,6 +37,10 @@ public abstract class AbstractLevel {
 	protected int numSpawned;
 	protected String name;
 	protected int difficulty=0;
+	protected boolean slowed=false;
+	protected Music music;
+	protected long soundInstance;
+	protected float speed=1f;
 	public AbstractLevel(PlayScreen state, int difficulty) {
 		this.state=state;
 		this.difficulty=difficulty;
@@ -67,9 +69,13 @@ public abstract class AbstractLevel {
 	
 	
 	public void update(float delta){
+		
+        
+        
 		//ending conditions
 		if(lvlTime>=lvlTimeLimit){
 			gameOver=true;
+			
 			return;
 		}
 		
@@ -91,8 +97,18 @@ public abstract class AbstractLevel {
 		if(Gdx.input.justTouched()){
 			AbstractObject obj=getOverlapCircle(objects, state.getViewport());
 			ColorBar box=getOverlapBox(layout.getBoxes(), state.getViewport());
-			
-			if(obj!=null&&box!=null&&obj.getColor().equals(box.getColor())){
+			if(obj!=null&&box!=null&&obj.getColor().equals(Color.BLUE)){
+				obj.setDestroyed(true);
+				slowed=true;
+				Timer.schedule(new Task(){
+	        	    @Override
+	        	    public void run() {
+	        	    	slowed=false;
+	                	
+	        	    }
+	        	}, 5f);
+			}
+			else if(obj!=null&&box!=null&&obj.getColor().equals(box.getColor())){
 				obj.setDestroyed(true);
 				score++;
 			}
@@ -116,7 +132,6 @@ public abstract class AbstractLevel {
                 continue;
             }
             obj.update(delta);
-            
         }
         if(layout==null)return;
         for(ColorBar box:layout.getBoxes()){
@@ -206,6 +221,9 @@ public abstract class AbstractLevel {
 	public PlayScreen getState() {
 		return state;
 	}
+	public Music getMusic() {
+		return music;
+	}
 
 	public void setState(PlayScreen state) {
 		this.state = state;
@@ -236,6 +254,8 @@ public abstract class AbstractLevel {
 		this.name = name;
 	}
 	
-	
+	public boolean isSlowed(){
+		return slowed;
+	}
 	
 }

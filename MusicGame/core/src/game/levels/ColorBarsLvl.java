@@ -1,5 +1,6 @@
 package game.levels;
 
+import game.Content;
 import game.MyConst;
 import game.levels.layouts.BarLayout;
 import game.objects.Ball;
@@ -9,6 +10,7 @@ import game.states.PlayScreen;
 
 import java.util.Random;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 /**
@@ -24,6 +26,8 @@ public class ColorBarsLvl extends AbstractLevel{
 		super(state, difficulty);
 		
 		name="ColorBars";
+		music=Content.getMusic("Theme");
+		
 		
 	}
 	@Override
@@ -100,10 +104,15 @@ public class ColorBarsLvl extends AbstractLevel{
 		
 		
 	}
+	
+	
 	public void spawnCircles(int number){
 		for(int i=0;i<number;i++){
 			int index=new Random().nextInt(objectColors.size());
 			Color color=objectColors.get(index);
+			if(Math.random()<0.1){
+				color=Color.BLUE;
+			}
 			AbstractObject obj=new Ball(state,color,50+(float)(Math.random()*200));
 			Vector2 position;
 			Vector2 direction;

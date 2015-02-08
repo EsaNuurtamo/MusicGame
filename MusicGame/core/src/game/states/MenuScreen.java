@@ -177,15 +177,15 @@ public class MenuScreen implements Screen {
                     	
                     	int d=0;
                     	if(s.equals("Easy")){
-                    		
                     		d=0;
                     	}else if(s.equals("Medium")){
-                    		
                     		d=1;
                     	}else{
                     		d=2;
                     	}
-                    	play.setLevel(new ColorBarsLvl(play, d));
+                    	ColorBarsLvl lvl=new ColorBarsLvl(play, d);
+                    	lvl.getMusic().play();
+                    	play.setLevel(lvl);
                     	game.setScreen(play);
                         dispose();
                     }else if(s.equals("Flying Boxes")){
