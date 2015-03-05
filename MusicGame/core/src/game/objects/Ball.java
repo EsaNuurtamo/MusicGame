@@ -1,11 +1,11 @@
 package game.objects;
 
-import game.MyConst;
+import game.Content;
 import game.states.PlayScreen;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 /**
  * Ball is the main object in the game and it yields score when tapped
@@ -14,12 +14,16 @@ import com.badlogic.gdx.math.Vector2;
 public class Ball extends AbstractObject{
 	protected float bombTimer=3f;
 	protected boolean goingUp;
-	
+	protected float imgW=130;
+	protected Sprite sprite;
 	public Ball(PlayScreen state, Color color, float speed) {
 		super(state);
 		this.color=color;
         this.speed=speed;
         this.destroyed=false;
+        this.sprite=new Sprite(Content.textures.get("Barrel"));
+        sprite.setColor(color);
+        sprite.setSize(imgW, imgW);
 	}
 	
 	public Ball(PlayScreen state, Color color, Vector2 position){
@@ -28,12 +32,13 @@ public class Ball extends AbstractObject{
 		
 	}
 	
-	public void draw(ShapeRenderer renderer){
-    	renderer.setColor(Color.BLACK);
+	public void draw(SpriteBatch batch){
+    	/*renderer.setColor(Color.BLACK);
 		renderer.circle(circle.x, circle.y, circle.radius);
     	renderer.setColor(color);
     	//renderer.cone(circle.x, circle.y, 0, 10, 10);
-		renderer.circle(circle.x, circle.y, circle.radius-10);
+		renderer.circle(circle.x, circle.y, circle.radius-10);*/
+		sprite.draw(batch);
     }
 	
 	
@@ -45,6 +50,7 @@ public class Ball extends AbstractObject{
     	}
     	moveLogic(delta);
     	circle.setPosition(position);
+    	sprite.setPosition(position.x-imgW/2,position.y-imgW/2);
     	
     }
 }

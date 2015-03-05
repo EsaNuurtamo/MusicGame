@@ -50,20 +50,20 @@ public class MenuScreen implements Screen {
 	public void render (float delta) {
 		Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
-                    if(menu.getParent()!=null){
-                        menu=menu.getParent();
-                        createMenuTable();
-                    }
-                }
+        if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
+            if(menu.getParent()!=null){
+                menu=menu.getParent();
+                createMenuTable();
+            }
+        }
+        
+
+        stage.act();
+        stage.draw();
                 
 		
-                stage.act();
-                stage.draw();
-               
-		
 	}
-
+	
 	@Override
 	public void resize (int width, int height) {
 		stage.getViewport().update(width, height, false);
@@ -171,8 +171,8 @@ public class MenuScreen implements Screen {
                     PlayScreen play=new PlayScreen(game);
                     if(s.equals("Exit")){
                     	
-                        Gdx.app.exit();
-                        
+                    	Gdx.app.exit();
+                    	
                     }else if(menu.getName().equals("Color Bars")){
                     	
                     	int d=0;

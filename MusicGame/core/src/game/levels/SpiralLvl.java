@@ -1,7 +1,7 @@
 package game.levels;
 
 import game.MyConst;
-import game.objects.Ball;
+import game.levels.layouts.SpiralLayout;
 import game.objects.AbstractObject;
 import game.objects.SpiralBall;
 import game.states.PlayScreen;
@@ -9,21 +9,29 @@ import game.states.PlayScreen;
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public class SpiralLvl extends AbstractLevel{
-
+	private SpiralLayout out;
 	public SpiralLvl(PlayScreen state) {
 		super(state,0);
 		name="Spiral";
+		
 	}
 	
 	@Override
 	public void init() {
 		super.init();
+		out=new SpiralLayout(state);
+		initColors(Color.RED, Color.ORANGE, Color.OLIVE, Color.GREEN);
 		
-		initColors(Color.RED, Color.ORANGE, Color.OLIVE);
-		
+	}
+	
+	@Override
+	public void initColors(Color... colors) {
+		out.createLayout(colors);
+		super.initColors(colors);
 	}
 
 	@Override
@@ -34,6 +42,12 @@ public class SpiralLvl extends AbstractLevel{
 		spawnBalls(toSpawn);
 		numSpawned+=toSpawn;
 		
+	}
+	public void draw(ShapeRenderer renderer){
+		if(out!=null)out.draw(renderer);
+        for(AbstractObject obj:objects){
+        	obj.draw(renderer);
+        }
 	}
 	
 	/*@Override

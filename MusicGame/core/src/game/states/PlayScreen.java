@@ -47,15 +47,17 @@ public class PlayScreen implements Screen{
     private boolean exiting=false;
      
     public PlayScreen(Game g) {
-        this.game=g;  
+        this.game=g;
         Content.loadMusic("sound/Theme.ogg", "Theme");
-        this.level=new ColorBarsLvl(this, 0);
+        Content.loadTexture("images/Barrel.png", "Barrel");	
+        	
+        
     }
     
     @Override
     public void show() {
     	
-        camera=new OrthographicCamera(MyConst.APP_WIDTH,MyConst.APP_HEIGHT);
+    	camera=new OrthographicCamera(MyConst.APP_WIDTH,MyConst.APP_HEIGHT);
         camera.position.set(MyConst.APP_WIDTH/2, MyConst.APP_HEIGHT/2, camera.position.z);
         camera.update();
         viewport=new FitViewport(MyConst.APP_WIDTH, MyConst.APP_HEIGHT, camera);
@@ -73,6 +75,7 @@ public class PlayScreen implements Screen{
         
         //inputMultiplexer.addProcessor();
         Gdx.input.setInputProcessor(new GestureDetector(touches));
+        
         
         
         
@@ -124,12 +127,14 @@ public class PlayScreen implements Screen{
         
         
         renderer.begin(ShapeType.Filled);
+        
 	        level.draw(renderer);
         renderer.end();
         
         //draw hud
         //HUOM luo oma class hudille
         batch.begin();
+        	level.drawImgs(batch);
         	font.draw(batch, "Health: "+level.getHealth()+
         			         " Score: "+level.getScore(), 
         			         5, MyConst.APP_HEIGHT-10

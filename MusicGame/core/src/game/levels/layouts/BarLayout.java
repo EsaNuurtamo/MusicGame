@@ -15,12 +15,13 @@ import com.badlogic.gdx.math.Vector2;
  * @author esa
  *
  */
-public class BarLayout {
+public class BarLayout{
 	private int numBoxes=0;
 	private PlayScreen state;
 	private List<ColorBar> boxes;
 	
 	public BarLayout(PlayScreen state) {
+		super();
 		boxes=new ArrayList<ColorBar>();
 		
 		this.state=state;

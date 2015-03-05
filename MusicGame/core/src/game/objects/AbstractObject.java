@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.Shape;
 
 /**
  * Class has the common properties of all the objects in game. All the objects are round.
- * Has the basic vector logic for moving to certain direction andlogic for drawing the image.
+ * Has the basic vector logic for moving to certain direction andlogic and for drawing the image.
  * @author esa
  */
 public abstract class AbstractObject{

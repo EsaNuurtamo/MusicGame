@@ -3,6 +3,7 @@ package game.levels;
 import game.input.Mouse;
 import game.levels.layouts.BarLayout;
 import game.objects.AbstractObject;
+import game.objects.Ball;
 import game.objects.ColorBar;
 import game.states.PlayScreen;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
@@ -100,11 +102,12 @@ public abstract class AbstractLevel {
 			if(obj!=null&&box!=null&&obj.getColor().equals(Color.BLUE)){
 				obj.setDestroyed(true);
 				slowed=true;
+				music.pause();
 				Timer.schedule(new Task(){
 	        	    @Override
 	        	    public void run() {
 	        	    	slowed=false;
-	                	
+	                	music.play();
 	        	    }
 	        	}, 5f);
 			}
@@ -143,7 +146,16 @@ public abstract class AbstractLevel {
 	public void draw(ShapeRenderer renderer){
 		if(layout!=null)layout.draw(renderer);
         for(AbstractObject obj:objects){
+        	
         	obj.draw(renderer);
+        }
+	}
+	public void drawImgs(SpriteBatch batch){
+		for(AbstractObject obj:objects){
+        	if(obj instanceof Ball){
+        		((Ball)obj).draw(batch);
+        	}
+        	
         }
 	}
 	

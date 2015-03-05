@@ -9,10 +9,14 @@ import com.badlogic.gdx.math.Vector2;
 
 public class ColorArea extends AbstractObject{
 	Polygon area;
-	public ColorArea(PlayScreen state, Vector2 position, Vector2[] vertices) {
+	protected Color orginalColor;
+	public ColorArea(PlayScreen state, Vector2 position, float[] vertices, Color color) {
 		super(state, position);
 		area=new Polygon();
-		float[] vert=new float[vertices.length*2];
+		area.setPosition(0, 0);
+		orginalColor=color;
+		
+		area.setVertices(vertices);
 	}
 
 	@Override
@@ -28,8 +32,9 @@ public class ColorArea extends AbstractObject{
 	@Override
 	public void draw(ShapeRenderer renderer) {
 		
-    	renderer.setColor(color);
-		renderer.polygon(area.getVertices());
+    	renderer.setColor(orginalColor);
+    	float [] f=area.getVertices();
+		renderer.triangle(f[0], f[1], f[2], f[3], f[4], f[5]);
 	}
 
 }

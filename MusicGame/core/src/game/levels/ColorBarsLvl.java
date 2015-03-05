@@ -26,6 +26,7 @@ public class ColorBarsLvl extends AbstractLevel{
 		super(state, difficulty);
 		
 		name="ColorBars";
+		if(Content.getMusic("Theme")==null)System.out.println("themenull");
 		music=Content.getMusic("Theme");
 		
 		
